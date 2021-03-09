@@ -1,0 +1,17 @@
+#pf-transaction-head {
+    padding: 10px 0;
+    font-size: large;
+    font-weight: normal;
+}
+
+#pf-transaction-err-msg {
+    padding: 10px;
+    border-color:#f16048;
+    background-color:#faebe7;
+}
+
+#pf-transaction-succ-msg {
+    padding: 10px;
+    border-color:#446423;
+    background-color:#eff5ea;
+}

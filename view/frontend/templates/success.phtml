@@ -1,0 +1,9 @@
+        <?php 
+        echo 'Template success.phtml <br>';
+        $block_obj= $block->getLayout()->createBlock('Pagofacil\Pagofacildirect\Block\Payment\Success');
+        $template_data = $block_obj->getSuccessMessage();
+        ?>
+        <div id="pf-transaction-head">Transacción con PagoFacil Finalizada: </div>
+        <div id="pf-transaction-succ-msg">
+            <?php echo $template_data['order_message']; ?>
+        </div>

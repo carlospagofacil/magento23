@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+             <group id="pagofacil_pagofacildirect" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>PagoFacil Direct</label>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Module Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="display_user_id" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>User key</label>
+                    <comment>The id user</comment>
+                </field>
+                <field id="display_user_branch_office_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Branch office key</label>
+                    <comment>The branch office id.</comment>
+                </field>
+                <field id="display_user_phase_id" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>User phase key</label>
+                    <comment>User phase key.</comment>
+                </field>
+                <field id="ecommerce_source"  translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Ecommerce Source</label>
+                </field>
+                <field id="endpoint_sandbox" translate="label" type="text" sortOrder="6" showInDefault="1" showInStore="0" showInWebsite="0">
+                    <label>Sandbox endpoint</label>
+                </field>
+                <field id="endpoint_production" translate="label" type="text" sortOrder="7" showInDefault="1" showInStore="0" showInWebsite="0">
+                    <label>Production endpoint</label>
+                </field>
+                <field id="is_sandbox" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sandbox enviroment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="monthy_installment_enabled" translate="label" type="select" sortOrder="9" showInDefault="1" showInStore="0" showInWebsite="0">
+                    <label>Enabled Monthy installment</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_3ds" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Activar 3D Secure</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cctypes" translate="label" type="multiselect" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Credit Card Types</label>
+                    <source_model>Magento\Payment\Model\Source\Cctype</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

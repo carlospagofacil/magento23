@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/error_mapping.xsd">
+    <message_list>
+        <message code="00001" translate="false">Hubo un error durante la transacción.</message>
+        <message code="81703" translate="true">Credit card type is not accepted by this merchant account.</message>
+        <message code="81706" translate="true">CVV is required.</message>
+        <message code="81707" translate="true">CVV must be 4 digits for American Express and 3 digits for other card types.</message>
+    </message_list>
+</mapping>

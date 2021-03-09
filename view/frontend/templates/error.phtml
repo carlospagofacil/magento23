@@ -1,0 +1,9 @@
+        <?php 
+        echo 'Template error.phtml <br>';
+        $block_obj= $block->getLayout()->createBlock('Pagofacil\Pagofacildirect\Block\Payment\Error');
+        $template_data = $block_obj->getErrorMessage();
+        ?>
+        <div id="pf-transaction-head">Transacción con PagoFacil Finalizada: </div>
+        <div id="pf-transaction-err-msg">
+            <?php echo $template_data['message']; ?>
+        </div>

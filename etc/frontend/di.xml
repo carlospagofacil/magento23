@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <virtualType name="Pagofacil\Pagofacildirect\Model\ConfigProvider" type="Magento\Payment\Model\CcGenericConfigProvider">
+        <arguments>
+            <argument name="methodCodes" xsi:type="array">
+                <item name="pagofacil_pagofacildirect" xsi:type="const">Pagofacil\Pagofacildirect\Model\Payment::CODE</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="pagofacil_pagofacildirect_config_provider"  xsi:type="object">
+                    Pagofacil\Pagofacildirect\Model\PagofacilConfigProvider
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento\Braintree\Gateway\ErrorMapper\VirtualConfigReader" type="Magento\Payment\Gateway\ErrorMapper\VirtualConfigReader">
+        <arguments>
+            <argument name="fileName" xsi:type="string">pagofacil_error_mapping.xml</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\Braintree\Gateway\ErrorMapper\VirtualMappingData" type="Magento\Payment\Gateway\ErrorMapper\MappingData">
+        <arguments>
+            <argument name="reader" xsi:type="object">Magento\Braintree\Gateway\ErrorMapper\VirtualConfigReader</argument>
+            <argument name="cacheId" xsi:type="string">pagofacil_error_mapping</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento\Braintree\Gateway\ErrorMapper\VirtualErrorMessageMapper" type="Magento\Payment\Gateway\ErrorMapper\ErrorMessageMapper">
+        <arguments>
+            <argument name="messageMapping" xsi:type="object">Magento\Braintree\Gateway\ErrorMapper\VirtualMappingData</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Pagofacil\Pagofacildirect\Source\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Pagofacil\Pagofacildirect\Source\Logger\PagofacilLog">
+        <arguments>
+            <argument name="name" xsi:type="string">PagofacilLog</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Pagofacil\Pagofacildirect\Source\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>
