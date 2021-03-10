@@ -1,8 +1,9 @@
 {
-  "name": "Pagofacil/Pagofacildirect",
-  "description": "Módulo de pago con PagoFacil.net para Magento 2",
+  "name": "pagofacil/pagofacildirect",
+  "description": "Módulo de pago con PagoFacil para Magento 2",
   "type": "magento2-module",
   "version": "1.0.0",
+  "keywords": ["magento 2", "PagoFacil", "Payment Gateway Integration", "Método de Pago"],
   "license": [
     "OSL-3.0",
     "AFL-3.0"
@@ -10,6 +11,11 @@
   "require": {
     "php": "~7.3"
   },
+  "authors": [{
+		"name": "Carlos González Hernández",
+		"email": "carlos.gonzalez@pagofacil.net",
+		"role": "Developer"
+  }],
   "autoload": {
     "files": [ "registration.php" ],
     "psr-4": {
