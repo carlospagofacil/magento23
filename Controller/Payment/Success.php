@@ -41,6 +41,16 @@ class Success extends \Magento\Framework\App\Action\Action
             $scopeConfig = $this->_objectManager->create('Magento\Framework\App\Config\ScopeConfigInterface');
             $cipherKey =  $scopeConfig->getValue('payment/pagofacil_pagofacildirect/display_user_phase_id', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
             
+            if($this->orderAlreadyExists($quote_id)){
+                echo 'IF SI orderAlreadyExists - Redireccionar a: '.$this->url().'<br>';
+                $mensaje = 'Ya existe una orden con este pedido';
+                $template_data = array('message' => $mensaje);
+                $this->coreRegistry->register('template_data', $template_data);
+                $resultPage = $this->resultPageFactory->create();
+                $resultPage->addHandle('pagofacildirect_payment_error'); 
+                return $resultPage;
+            }
+            
             $descifrar =  new PagoFacilDescifrar();
             $dataResponse = $descifrar->desencriptar_php72($post_data['response'], $cipherKey);
             $dataResponse = json_decode($dataResponse);
@@ -217,6 +227,23 @@ class Success extends \Magento\Framework\App\Action\Action
           isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
           $_SERVER['SERVER_NAME']
         );
+    }
+    
+    private function orderAlreadyExists($quote_id) {
+        
+        $order_exists = false;
+        $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+        $connection = $resource->getConnection();
+        $sales_order = $resource->getTableName('sales_order');
+        $sql = "SELECT entity_id, state, status, quote_id, increment_id FROM `".$sales_order."` WHERE quote_id = '".$quote_id."'";
+        $result = $connection->fetchAll($sql);
+
+        if(count($result) > 0){
+            $order_exists = true;
+        }
+        
+        return $order_exists;
     }
     
 }
