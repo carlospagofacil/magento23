@@ -43,7 +43,7 @@ class Success extends \Magento\Framework\App\Action\Action
             
             if($this->orderAlreadyExists($quote_id)){
                 echo 'IF SI orderAlreadyExists - Redireccionar a: '.$this->url().'<br>';
-                $mensaje = 'Ya existe una orden con este pedido';
+                $mensaje = 'Ya existe una orden con este carrito';
                 $template_data = array('message' => $mensaje);
                 $this->coreRegistry->register('template_data', $template_data);
                 $resultPage = $this->resultPageFactory->create();
