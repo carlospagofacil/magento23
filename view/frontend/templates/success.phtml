@@ -7,3 +7,18 @@
         <div id="pf-transaction-succ-msg">
             <?php echo $template_data['order_message']; ?>
         </div>
+        <div id="pf-transaction-name">
+            Cliente: <?php echo $template_data['customer_name']; ?>
+        </div>
+        <div id="pf-transaction-products">
+            <?php 
+                echo 'Productos: <br>';
+                foreach ($template_data['product_list'] as $product){
+                    echo 'Product ID: '.$product['product_id'].'<br>';
+                    echo 'Product Name: '.$product['product_name'].'<br>';
+                    echo 'Product SKU: '.$product['product_sku'].'<br>';
+                    echo 'Product Qty: '.$product['product_qty'].'<br>';
+                    echo 'Product Price: '.$product['product_price'].'<br>';
+                }
+            ?>
+        </div>

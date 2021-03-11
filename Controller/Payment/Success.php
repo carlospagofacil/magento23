@@ -102,14 +102,16 @@ class Success extends \Magento\Framework\App\Action\Action
                     $quoteFactory = $this->_objectManager->create('Magento\Quote\Model\QuoteFactory');
                     $quote = $quoteFactory->create()->load($quote_id);
 
-                    /* foreach($quote->getAllVisibleItems() as $item) {
-                        echo 'ID: '.$item->getProductId().'<br />';
-                        echo 'Name: '.$item->getName().'<br />';
-                        echo 'Sku: '.$item->getSku().'<br />';
-                        echo 'Quantity: '.$item->getQty().'<br />';
-                        echo 'Price: '.$item->getPrice().'<br />';
-                        echo "<br />";            
-                    } */
+                    $product_list = array();
+                    foreach($quote->getAllVisibleItems() as $item) {
+                        $product_list[] = array(
+                                        'product_id' => $item->getProductId(),
+                                        'product_name' => $item->getName(),
+                                        'product_sku' => $item->getSku(),
+                                        'product_qty' => $item->getQty(),
+                                        'product_price' => $item->getPrice()
+                                );
+                    }
 
                     echo'Controlador Success 3ds - PagoFacilDescifrar CustomerSession isLoggedIn: <br>';
                     $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -137,6 +139,8 @@ class Success extends \Magento\Framework\App\Action\Action
                         $address_data['shipping_address']['telephone'] = $address->getData('telephone');
                         $address_data['shipping_address']['fax'] = $address->getData('fax');
                         $address_data['shipping_address']['save_in_address_book'] = 0;
+                        
+                        $customer_name = $customer->getFirstName() . ' ' . $customer->getLastName();
 
                         $quote->getBillingAddress()->addData($address_data['shipping_address']);
                         $quote->getShippingAddress()->addData($address_data['shipping_address']);
@@ -183,7 +187,11 @@ class Success extends \Magento\Framework\App\Action\Action
                                     ->save();
 
                                 $order_message = 'Se ha creado con éxito el pedido número: '.$order->getRealOrderId();
-                                $template_data = array('order_message' => $order_message);
+                                $template_data = array(
+                                                'order_message' => $order_message,
+                                                'customer_name' => $customer_name,
+                                                'product_list' => $product_list
+                                        );
                                 
                                 $this->coreRegistry->register('template_data', $template_data);
                                 $resultPage = $this->resultPageFactory->create();
